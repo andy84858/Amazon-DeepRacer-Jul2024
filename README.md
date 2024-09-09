@@ -256,12 +256,35 @@ DR_LOCAL_S3_PRETRAINED_CHECKPOINT=best
 ![strategy2](upload_img/strategy2.png)
 3. 獎勵車子看最遠waypoint進行角度調整 [strategy3](reward_function/Strategy_3_reward_function.py)
 ![strategy3](upload_img/strategy3.png)
-4. 依照下面三個waypoint的角度差進行調整，並標注彎角，鼓勵車子在入彎前靠左或靠右 [strategy4](reward_function/Strategy_4_reward_function.py)
+5. 依照下面三個waypoint的角度差進行調整，並標注彎角，鼓勵車子在入彎前靠左或靠右 [strategy4](reward_function/Strategy_4_reward_function.py)
+
+七月份的比賽，我們分別以前三種策略進行測試，最終這三個策略的表現以策略二表現最好，測試結果如下：
+![strategy_result](upload_img/strategy_result.png)
+
+我們後期也是以這個策略拿到七月份台灣第四，全球前一百，但後續如果可以繼續探索，會打算將策略一跟策略二進行整合。
+
+而策略四則是在八月份的比賽嘗試將策略一跟策略三整合的結果，在八月份初期表現中仍不及策略二。
+[strategy2&4_8_result](upload_img/strategy2&4_8_result.png)
 
 ## 6.Action Space
 Action Space的調整我們依照賽道的不同特性進行調整，例如左彎較多的賽道會設定較為細節的入彎角度、速度。具體設置步驟，可以參考[Capstone_AWS_DeepRacer提供的racing line action space](https://github.com/dgnzlz/Capstone_AWS_DeepRacer/blob/master/Compute_Speed_And_Actions/RaceLine_Speed_ActionSpace.ipynb)
+
 ![action_space_setting](upload_img/action_space_setting.png)
 
 ## 7.Hyperparameters
+* batch_size
+  模型每次更新所使用的樣本數，越多代表每次更新則越穩定。初期若要快速迭代，建議可調為32或64，後期可調為128或256
+* e_greedy_value
+  模型探索新的policy的機率，越高代表車子會探索更多可能的policy，越低代表車子會更多利用既有的policy。訓練初期我會設定0.05鼓勵車子探索不同的policy，隨著模型越來越收斂，我會調整為0.005~0.001之間
+* beta_entropy
+  在同樣的policy中嘗試不同動作的機率，如果車子已經開始可以在eval階段不超出賽道(完成率100%)，可以考慮稍微調高beta_entropy，初期我設為0.01，到後期當車子都可以穩定完賽之後，我會調高為0.03-0.05。
 
+  例如以下儀表板可以發現車子已經有完賽的紀錄了，我接下來就會縮小e_greedy_value，並調高beta_entropy
+  ![converage](upload_img/converage.png)
+  
+* discount_factor
+  是指模型是否會看重長期的獎勵而做出短期的犧牲，或是專注當下獲得最高的獎勵，類似於蒙地卡羅搜索法，原始設定為0.999，但這可能導致模型會為了未來性，過多嘗試其他可能的policy，如果在模型已經有收斂的狀況之下，我會下調至0.985，讓模型專注於處理當前的動作是否能夠優化。
+* lr
+  學習率也是需要隨著訓練逐漸收斂而逐步往下調，一開始我設定為0.0005，而隨著模型開始收斂，policy基本確定之後，我會逐步下調至0.0001
+  
 ## 8.Log Anlysis
