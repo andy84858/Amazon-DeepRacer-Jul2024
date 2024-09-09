@@ -3,14 +3,14 @@
 這個repo紀錄stanCode201 Mar2024 AI班 B組參與DeepRacer 7月份的過程，我會詳細記錄如何一步一步執行DeepRacer Community提供的deepracer-for-cloud(DRfC)的訓練，以及說明我們小組的策略。
 
 README會包含以下內容：
-1. 參賽結果
-2. AWS DeepRacer介紹
-3. 如何進行DRfC的訓練
-4. 總花費
-5. Reward function
-6. Action Space
-7. Hyperparameters
-8. Log Anlysis
+[1. 參賽結果](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#1%E5%8F%83%E8%B3%BD%E7%B5%90%E6%9E%9C)
+[2. AWS DeepRacer介紹](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#2aws-deepracer%E4%BB%8B%E7%B4%B9)
+[3. 如何進行DRfC的訓練](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#3%E5%A6%82%E4%BD%95%E9%80%B2%E8%A1%8Cdrfc%E7%9A%84%E8%A8%93%E7%B7%B4)
+[4. 總花費](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#4%E7%B8%BD%E8%8A%B1%E8%B2%BB)
+[5. Reward function](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#5reward-function)
+[6. Action Space](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#6action-space)
+[7. Hyperparameters](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#7hyperparameters)
+[8. Log Anlysis](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#8log-anlysis)
 
 ## 1.參賽結果
 ![stanCode小組七月分參賽結果](upload_img/DeepRacer_Jul_Result.jpeg)
@@ -339,4 +339,5 @@ PROFILE=None          # The credentials profile in .aws - 'minio' for local trai
 S3_ENDPOINT_URL=None  # Endpoint URL: None for AWS S3, 'http://minio:9000' for local training
 ```
 接著restart and run all就可以了
-
+---
+以上是紀錄stanCode Mar2024 B組此次參加AWS DeepRacer 7月份競賽的紀錄，如有任何指教交流，歡迎聯繫我的email：andy84858@gmail.com
