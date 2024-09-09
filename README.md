@@ -349,5 +349,6 @@ PROFILE=None          # The credentials profile in .aws - 'minio' for local trai
 S3_ENDPOINT_URL=None  # Endpoint URL: None for AWS S3, 'http://minio:9000' for local training
 ```
 接著restart and run all就可以了
+
 ---
 以上是紀錄stanCode Mar2024 B組此次參加AWS DeepRacer 7月份競賽的紀錄，如有任何指教交流，歡迎聯繫我的email：andy84858@gmail.com
