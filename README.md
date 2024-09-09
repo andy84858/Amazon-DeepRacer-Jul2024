@@ -56,7 +56,9 @@ AWS在這個競賽中提供兩種常見的演算法：PPO 和 SAC，主要有三
 ### (3)在終端機連線到已建立好的EC2 instance
 請確保已先申請EC2的金鑰(.pem)(切記不能弄丟)並儲存在電腦，以下以Mac的操作為例進行說明
 a. 開啟終端機
+
 b. 輸入連線金鑰
+
 ```
 chmod 400 sc201.pem
 ssh -i sc201.pem ubuntu@44.197.185.38 # IP位置請更換為您所申請的EC2 instance的IPv4 public IP
@@ -138,29 +140,38 @@ cd deepracer-for-cloud
 ls -l DONE
 ```
 ![Done文件](upload_img/ls_done.png)
+
 接著就可以開始進行雲端訓練了。
+
 初次使用時，S3 Bucket是空的，所以可以先上傳最簡單的模板（後續可在S3自行更改）
 ```
 dr-upload-custom-files
 ```
 ![upload_custom_file](upload_img/upload_custom_file.png)
+
 接著可以在S3裡面找到檔案
+
 ![find_custom_file_1](upload_img/find_custom_file_1.png)
+
 點進去之後裡面就是預設的檔案了
+
 ![find_custom_file_2](upload_img/find_custom_file_2.png)
 
 設定好reward_function, model_metadata以及hyperparameter後就可以開始訓練了！
 ```
 dr-start-training
 ```
-！！！需注意，若要暫停training或是evaluation，都需要輸入`dr-stop-training`或是`dr-stop-evaluation`，不然該Docker Image並不會關掉，下次再以同樣的ID進行訓練時會發生錯誤。
+>！！！需注意，若要暫停training或是evaluation，都需要輸入`dr-stop-training`或是`dr-stop-evaluation`，不然該Docker Image並不會關掉，下次再以同樣的ID進行訓練時會發生錯誤。
 
 ### (4)在DRfC進行多人訓練
 在DRfC提供的套件中，可以執行多個訓練，需注意的是申請的instance的容量以及速度會影響到可訓練的資源分配，舉例來說g4dn.2xlarge我們嘗試最多可以進行三組訓練，如有需要進行更多人同時訓練，可能要考慮申請更大的instance資源(請衡量預算，AWS的instance使用並不便宜...後續會在花費中說明)
 
 a. 連線至EC2 instance `cd deepracer-for-cloud`
+
 b. 建立自己的run.env檔 `cp run.env <你的檔名>.env`
+
 接著修改自己的.env檔以及system.env，改成自己需要的參數，記得修改自己的.env檔中的DR_RUN_ID，因為deepracer-for-cloud是以ID來區分stack。
+
   * 修改system.env (只會有一個system.env檔案)
     ```
     DR_LOCAL_S3_PROFILE=default
@@ -184,26 +195,37 @@ b. 建立自己的run.env檔 `cp run.env <你的檔名>.env`
     DR_EVAL_SAVE_MP4=True 
     ```
 確認修改完畢後`Ctrl+O`覆寫文件，最後Enter儲存，`Ctrl+X`離開。
+
 c. 修改完成後執行`source bin/activate.sh <你的.env檔>`切換run.env的stack（需注意，如果同時有多人進行訓練，請同時確認system.env的DR_RUN_ID還有裡面的S3 bucket的位置是否為您的S3 Bucket位置）
+
 d. 如同時有多人進行訓練，要觀看數據儀表板跟即時路況時都要輸入`source bin/activate.sh <你的.env檔>`，並且一樣要確認system.env的DR_RUN_ID是否正確
 
 ### (5)觀看訓練畫面
 首先，另外開一個終端機畫面進到EC2 instance，輸入`source bin/activate.sh <你的run.env>`，接著輸入`dr-start-viewer`
+
 要記得前面需在system.env修改DR_WEBVIEWER_PORT為你自己的專屬port，會看到以下訊息
+
 ![dr_start_viewer](upload_img/dr_start_viewer.png)
+
 接著離開EC2 instance，在初始畫面中輸入`ssh -i sc201.pem -L 8101:localhost:8101 ubuntu@44.197.185.38`(記得port 8101要依照user去改)
+
 在瀏覽器貼上`http://localhost:8101`(Port記得要改)，Enter後就可以看到訓練畫面
+
 ![training_viewer](upload_img/training_viewer.png)
 
 ### (6)觀看訓練儀表板
 在執行`dr-start-training`後，在EC2 instance，輸入`source bin/activate.sh <你的run.env>`，接著輸入`dr-start-metrics`，即可開啟儀表板的port
+
 ![dr-start-metrics](upload_img/dr-start-metric.png)
+
 登入grafana頁面，帳密初始設定都為admin，後續可自行更改，進去後可在dashboard看到DeepRacer Training template
+
 ![metrics_1](upload_img/metrics_1.png)
 ![metrics_2](upload_img/metrics_2.png)
 
 ### (7)接續訓練
 如果因為instance停止，或是隨著模型逐漸收斂，修改了reward_function, model_metadata, hyperparameter，想要繼續上次的訓練，需修改run.env中的參數並儲存。
+
 ```
 DR_LOCAL_S3_MODEL=本次訓練存放S3的資料夾(此次訓練的S3資料夾名稱，執行後會自動新增至S3)
 DR_LOCAL_S3_PRETRAINED=True
@@ -211,9 +233,12 @@ DR_LOCAL_S3_PRETRAINED_PREFIX=上次訓練存放的資料夾(rl-deepracer-sagema
 DR_LOCAL_S3_PRETRAINED_CHECKPOINT=best
 ```
 同時確認system.env的ID是不是你自己的，開始訓練前`echo $DR_UPLOAD_S3_BUCKET`再次確認現在上傳的資料夾是不是你自己的，並開始訓練`dr-start-training`
+
 此外，也可以用`docker stack ls`指令看現在docker中自己編號的stack是否正在運行
   
 ## 4.總花費
+
+
 ## 5.Reward function
 ## 6.Action Space
 ## 7.Hyperparameters
