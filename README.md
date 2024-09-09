@@ -6,12 +6,19 @@
 
 README會包含以下內容：
 [1. 參賽結果](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#1%E5%8F%83%E8%B3%BD%E7%B5%90%E6%9E%9C)
+
 [2. AWS DeepRacer介紹](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#2aws-deepracer%E4%BB%8B%E7%B4%B9)
+
 [3. 如何進行DRfC的訓練](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#3%E5%A6%82%E4%BD%95%E9%80%B2%E8%A1%8Cdrfc%E7%9A%84%E8%A8%93%E7%B7%B4)
+
 [4. 總花費](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#4%E7%B8%BD%E8%8A%B1%E8%B2%BB)
+
 [5. Reward function](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#5reward-function)
+
 [6. Action Space](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#6action-space)
+
 [7. Hyperparameters](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#7hyperparameters)
+
 [8. Log Anlysis](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#8log-anlysis)
 
 ## 1.參賽結果
