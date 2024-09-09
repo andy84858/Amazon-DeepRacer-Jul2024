@@ -14,12 +14,16 @@ README會包含以下內容：
 
 ## 1.參賽結果
 ![stanCode小組七月分參賽結果](upload_img/DeepRacer_Jul_Result.jpeg)
+
 感謝同組夥伴Blair, 孟勳, 宇韜, 沛融還有mentor南哥，最重要的是全額贊助我們的stanCode創辦人Jerry，讓我們可以不用擔心AWS貴鬆鬆的花費盡情的訓練！
+
 我們組別在七月份的競賽結果為全台第四名，以及全球前一百名！！！
 
 ## 2.AWS DeepRacer介紹
 關於DeepRacer是什麼，以及競賽規則說明可以參考[官方網站的說明](https://docs.aws.amazon.com/zh_tw/deepracer/latest/developerguide/what-is-deepracer.html)。
+
 在此會著重在DeepRacer Community中常常提到的專有名詞以及其應用的RL原理進行說明：
+
 ![RL與監督式學習的比較](upload_img/SL_RL.png)
 
 SL跟RL這兩種訓練方式的訓練資料很不一樣，監督式學習的資料有固定的答案，所以我們的目標就是盡量減少判斷的錯誤，因此我們會用Gradient Decent的方式讓誤差隨著訓練而下降。
@@ -55,6 +59,7 @@ AWS在這個競賽中提供兩種常見的演算法：PPO 和 SAC，主要有三
 
 ### (3)在終端機連線到已建立好的EC2 instance
 請確保已先申請EC2的金鑰(.pem)(切記不能弄丟)並儲存在電腦，以下以Mac的操作為例進行說明
+
 a. 開啟終端機
 
 b. 輸入連線金鑰
@@ -237,9 +242,26 @@ DR_LOCAL_S3_PRETRAINED_CHECKPOINT=best
 此外，也可以用`docker stack ls`指令看現在docker中自己編號的stack是否正在運行
   
 ## 4.總花費
-
+由於RL的訓練時長相較於一般的機器學習更長，每次微調參數或是reward_function的結果可能需要幾個小時後才能夠看出是否有微調成功，我們小組在七月份與八月初經過不斷的嘗試經過不斷的嘗試，約花了637個小時在進行訓
+包含DeepRacer Console中超出10小時免費額度，總金額花費如下：
+![jul_cost](upload_img/jul_cost.png)
+![aug_cost](upload_img/aug_cost.png)
+含稅後金額，共約700美，如果有想要嘗試且有不錯的顯卡的話，建議可以在本地端運行DRfC（或是找金主爸爸），雲端運算花費相當昂貴...
 
 ## 5.Reward function
+我們總共有四種不同的策略，以下分別介紹reward_function的設計思路：
+1. 依照不同的彎角類型制定相對應的過彎速度以及方向盤角度 [strategy1](reward_function/Strategy_1_reward_function.py)
+![strategy1](upload_img/strategy1.png)
+2. 獎勵車子逼近計算的曲率前進 [strategy2](reward_function/Strategy_2_reward_function.py)
+![strategy2](upload_img/strategy2.png)
+3. 獎勵車子看最遠waypoint進行角度調整 [strategy3](reward_function/Strategy_3_reward_function.py)
+![strategy3](upload_img/strategy3.png)
+4. 依照下面三個waypoint的角度差進行調整，並標注彎角，鼓勵車子在入彎前靠左或靠右 [strategy4](reward_function/Strategy_4_reward_function.py)
+
 ## 6.Action Space
+Action Space的調整我們依照賽道的不同特性進行調整，例如左彎較多的賽道會設定較為細節的入彎角度、速度。具體設置步驟，可以參考[Capstone_AWS_DeepRacer提供的racing line action space](https://github.com/dgnzlz/Capstone_AWS_DeepRacer/blob/master/Compute_Speed_And_Actions/RaceLine_Speed_ActionSpace.ipynb)
+![action_space_setting](upload_img/action_space_setting.png)
+
 ## 7.Hyperparameters
+
 ## 8.Log Anlysis
