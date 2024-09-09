@@ -1,6 +1,6 @@
 # AWS DeepRacer stanCode 201 Mar2024 B組 July 參賽紀錄
 
-這個repo紀錄stanCode201 Mar2024 AI班 B組參與DeepRacer 7月份的過程，我會詳細記錄如何一步一步執行DeepRacer Community提供的deepracer-for-cloud(DRfC)的訓練，以及說明我們小組的策略。
+這個repo紀錄stanCode201 Mar2024 AI班 B組參與DeepRacer 2024年7月份競賽的過程，我會詳細記錄如何一步一步執行DeepRacer Community提供的deepracer-for-cloud(DRfC)的訓練，以及說明我們小組的策略。
 
 本次參賽過程有Poster影片(不包含以下將說明的操作步驟)，可參考[影片](https://www.youtube.com/watch?v=BqnjWnOes7M)
 
