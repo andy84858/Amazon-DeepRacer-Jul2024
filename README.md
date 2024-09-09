@@ -2,6 +2,8 @@
 
 這個repo紀錄stanCode201 Mar2024 AI班 B組參與DeepRacer 7月份的過程，我會詳細記錄如何一步一步執行DeepRacer Community提供的deepracer-for-cloud(DRfC)的訓練，以及說明我們小組的策略。
 
+本次參賽過程有Poster影片(不包含以下將說明的操作步驟)，可參考[影片](https://www.youtube.com/watch?v=BqnjWnOes7M)
+
 README會包含以下內容：
 [1. 參賽結果](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#1%E5%8F%83%E8%B3%BD%E7%B5%90%E6%9E%9C)
 [2. AWS DeepRacer介紹](https://github.com/andy84858/Amazon-DeepRacer-Jul2024?tab=readme-ov-file#2aws-deepracer%E4%BB%8B%E7%B4%B9)
