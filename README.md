@@ -259,6 +259,12 @@ DR_LOCAL_S3_PRETRAINED_CHECKPOINT=best
 含稅後金額，共約700美，如果有想要嘗試且有不錯的顯卡的話，建議可以在本地端運行DRfC（或是找金主爸爸），雲端運算花費相當昂貴...
 
 ## 5.Reward function
+一開始我們嘗試使用先計算出racing line，鼓勵車子逼進racing line，這樣的做法雖然可以穩定讓車子學習路線，但訓練出來的車子相較於方法二仍慢了約5-10秒。
+
+![k1999](upload_img/k1999.png)
+
+後續我們討論，認為這種方法似乎不太符合RL的宗旨，所以沒有繼續深挖這個方法。不過專案結束後，我回顧方法二之所以慢的原因可能源自當初在應用[dgnzlz的方法](https://github.com/dgnzlz/Capstone_AWS_DeepRacer/blob/master/Reward_Function/reward_function.py)時，我們並沒有依照他提供的action space設計針對賽道設置專門的action space，詳細可見下面的action space說明。後續如有機會，會再次嘗試以racing line的方式設置專門的action space。
+
 我們總共有四種不同的策略，以下分別介紹reward_function的設計思路：
 1. 依照不同的彎角類型制定相對應的過彎速度以及方向盤角度 [strategy1](reward_function/Strategy_1_reward_function.py)
 ![strategy1](upload_img/strategy1.png)
@@ -276,8 +282,9 @@ DR_LOCAL_S3_PRETRAINED_CHECKPOINT=best
 而策略四則是在八月份的比賽嘗試將策略一跟策略三整合的結果，在八月份初期表現中仍不及策略二。
 ![strategy2&4_8_result](upload_img/strategy2&4_8_result.png)
 
+
 ## 6.Action Space
-Action Space的調整我們依照賽道的不同特性進行調整，例如左彎較多的賽道會設定較為細節的入彎角度、速度。具體設置步驟，可以參考[Capstone_AWS_DeepRacer提供的racing line action space](https://github.com/dgnzlz/Capstone_AWS_DeepRacer/blob/master/Compute_Speed_And_Actions/RaceLine_Speed_ActionSpace.ipynb)
+Action Space的調整我們依照賽道的不同特性進行調整，例如左彎較多的賽道會設定較為細節的入彎角度、速度。具體設置步驟，可以參考[dgnzlz提供的racing line action space](https://github.com/dgnzlz/Capstone_AWS_DeepRacer/blob/master/Compute_Speed_And_Actions/RaceLine_Speed_ActionSpace.ipynb)
 
 ![action_space_setting](upload_img/action_space_setting.png)
 
@@ -305,7 +312,7 @@ Action Space的調整我們依照賽道的不同特性進行調整，例如左�
 ## 8.Log Anlysis
 DeepRacer Community社群提供了可在雲端輸入`dr-start-loganalysis`直接打開jupyter lab，並連線到localhost:8888進行分析的方法。
 
-說明見tylerwooten的GitHub，目前遇到問題為連線到jupyter lab之後需要輸入token，但token輸入後仍無法進去。因此以下以在本地端進行操作來說明：
+說明見tylerwooten的[GitHub](https://github.com/tylerwooten/deepracer-for-cloud-setup/blob/main/EC2-jupyter-log-analysis.md)，目前遇到問題為連線到jupyter lab之後需要輸入token，但token輸入後仍無法進去。因此以下以在本地端進行操作來說明：
 
 a. 首先確保訓練完成後已執行`dr-start-evaluation`跟`dr-stop-evaluation`
 
